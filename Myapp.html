@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Store - Medicine Availability</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #0d47a1;
+        }
+
+        form {
+            margin-top: 30px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0d47a1;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to ABC Medical Store</h1>
+    <p>Search for available medicines:</p>
+
+    <form onsubmit="checkMedicine(event)">
+        <input type="text" id="medicineInput" placeholder="Enter medicine name" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        const medicines = ["Paracetamol", "Amoxicillin", "Ibuprofen", "Cetrizine", "Azithromycin"];
+
+        function checkMedicine(event) {
+            event.preventDefault(); // prevent form reload
+            const input = document.getElementById("medicineInput").value.trim();
+            const resultDiv = document.getElementById("result");
+
+            if (input === "") {
+                resultDiv.innerHTML = "Please enter a medicine name.";
+                return;
+            }
+
+            const found = medicines.some(med => med.toLowerCase() === input.toLowerCase());
+
+            if (found) {
+                resultDiv.innerHTML = `<span style="color: green;">✔️ ${input} is available in the store.</span>`;
+            } else {
+                resultDiv.innerHTML = `<span style="color: red;">❌ ${input} is not available right now.</span>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
